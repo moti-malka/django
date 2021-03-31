@@ -54,7 +54,13 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
-        
+    
+    - uses: danielr1996/kubectl-action@1.0.0
+      name: Deploy
+      with:
+       kubeconfig: ${{ secrets.KUBE_CONFIG_DATA_STAGING }}
+       args: apply -f deployment.yml
+    
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
       env:
