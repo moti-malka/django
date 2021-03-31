@@ -55,5 +55,5 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws_region: us-west-2
         cluster_name: my-cluster-demo
-        args: set image --record deployment/pod-name pod-name=django
+        args: set image --record deployment/django
  
