@@ -48,9 +48,20 @@ jobs:
         region: us-west-2        
         image: django-repo
     
-    - uses: danielr1996/kubectl-action@1.0.0
-      name: wahyd4/kubectl-helm-action@master
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+        
+    - name: deploy to cluster
+      uses: kodermax/kubectl-aws-eks@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_STAGING }}
+        ECR_REGISTRY: 480008901873.dkr.ecr.us-west-2.amazonaws.com
+        ECR_REPOSITORY: django-repo
+        IMAGE_TAG: ${{ github.sha }}
       with:
-        args: kubectl apply -f deployment.yml
+        args: set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        
