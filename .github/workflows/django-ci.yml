@@ -47,9 +47,9 @@ jobs:
         secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         region: us-west-2        
         image: django-repo
-    - uses: danielr1996/kubectl-action@1.0.0
     
-    - name: Deploy
+    - uses: danielr1996/kubectl-action@1.0.0
+      name: Deploy to EKS
       with:
         kubeconfig: ${{ secrets.KUBE_CONFIG_DATA_STAGING }}
         args: apply -f demo/deployment.yml
