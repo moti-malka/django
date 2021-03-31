@@ -47,13 +47,9 @@ jobs:
         secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         region: us-west-2        
         image: django-repo
+    - uses: danielr1996/kubectl-action@1.0.0
     
-    - name: Build and push image
-      uses: ianbelcher/eks-kubectl-action@master
+    - name: Deploy
       with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws_region: us-west-2
-        cluster_name: my-cluster-demo
-        args: set image --record deployment/django
- 
+        kubeconfig: ${{ secrets.KUBE_CONFIG_DATA_STAGING }}
+        args: apply -f demo/deployment.yml
