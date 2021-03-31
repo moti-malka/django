@@ -53,4 +53,4 @@ jobs:
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_STAGING }}
       with:
-        args: kubectl apply -f demo/deployment.yml
+        args: kubectl apply -f deployment.yml
