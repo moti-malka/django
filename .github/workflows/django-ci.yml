@@ -57,7 +57,7 @@ jobs:
         access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         region: us-west-2        
-        image: django-repo/my-app:${{ github.sha }}
+        image: django-repo
     
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
