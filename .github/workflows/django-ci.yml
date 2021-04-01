@@ -46,6 +46,19 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
+    - run: |
+          cd demo
+          docker build --tag django-repo/my-app:${{ github.sha }} .
+          
+    - name: Push to ECR
+      id: ecr
+      uses: jwalton/gh-ecr-push@v1
+      with:
+        access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        region: us-west-2        
+        image: django-repo/my-app:${{ github.sha }}
+    
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
       env:
@@ -54,5 +67,5 @@ jobs:
         ECR_REPOSITORY: django-repo
         IMAGE_TAG: ${{ github.sha }}
       with:
-        args: set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY
+        args: set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         
