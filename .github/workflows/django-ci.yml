@@ -59,6 +59,9 @@ jobs:
         region: us-west-2        
         image: django-repo
    
+    - name: Update kubeconfig
+      run: aws eks --region us-west-2 update-kubeconfig --name my-cluster-demo
+      
     - name: Deploy to eks
       run:   kubectl apply -f demo/deployment.yml
         
