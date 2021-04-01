@@ -48,7 +48,7 @@ jobs:
 
     - run: |
           cd demo
-          docker build --tag django-repo/my-app:${{ github.sha }} .
+          docker build --tag django-repo .
           
     - name: Push to ECR
       id: ecr
