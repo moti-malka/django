@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: django-repo
+  name: my-app
 spec:
   replicas: 1
   selector:
@@ -28,7 +28,7 @@ spec:
   - port: 80
     targetPort: 8000
   selector:
-    app: django-repo
+    app: django-webservice
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
