@@ -20,6 +20,9 @@ ENV PYTHONUNBUFFERED 1
 # install dependencies  
 RUN pip install --upgrade pip  
 
+# install coralogix  
+RUN pip install coralogix_logger
+
 # copy whole project to your docker home directory
 COPY . $DockerHOME
 
