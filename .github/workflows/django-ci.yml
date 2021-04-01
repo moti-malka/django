@@ -34,10 +34,6 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-     
-    - run: |
-          cd demo
-          docker build --tag django-repo .
     
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -49,15 +45,6 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-      
-    - name: Push to ECR
-      id: ecr
-      uses: jwalton/gh-ecr-push@v1
-      with:
-        access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: us-west-2        
-        image: django-repo
 
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
