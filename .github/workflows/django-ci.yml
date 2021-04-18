@@ -36,10 +36,10 @@ jobs:
         python -m pip install --upgrade pip
     
     - name: set run id
-      id: GenerateId
+      id: generateId
       run: |
         echo "$((${{github.run_number}}+10))"
         echo '::set-output name=RUN_NUMBER_CUSTOM::"$((${{github.run_number}}+10))"'
-        echo "The run number is:  ${{ steps.random-color-generator.outputs.RUN_NUMBER_CUSTOM }}"
+        echo "The run number is:  ${{ steps.generateId.outputs.RUN_NUMBER_CUSTOM }}"
      
         
