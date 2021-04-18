@@ -35,8 +35,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip
     
-    - name: echo 
+    - name: set run id
+      id: GenerateId
       run: |
         echo "$((${{github.run_number}}+10))"
+        echo '::set-output name=RUN_NUMBER_CUSTOM::"$((${{github.run_number}}+10))"'
+        echo "The run number is:  ${{ steps.random-color-generator.outputs.RUN_NUMBER_CUSTOM }}"
      
         
