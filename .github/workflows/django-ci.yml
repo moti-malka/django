@@ -38,9 +38,14 @@ jobs:
         python -m pip install --upgrade pip
     
     - name: set run id
-      id: generateId
       run: |
-        echo "The run id is: $((${{github.run_number}}+${{env.STARTING_RUN_NUMBER}}))"
+        echo "::set-output name=GID::$((${{github.run_number}}+${{env.STARTING_RUN_NUMBER}}))"
+      id: generateId
+    
+    - name: Get id
+      run: echo "The id is ${{ steps.generateId.outputs.GID }}"
+      
+
 
      
         
