@@ -37,6 +37,6 @@ jobs:
     
     - name: echo 
       run: |
-        echo "$((10+20))"
+        echo "$((${{github.run_number}}+10))"
      
         
