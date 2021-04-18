@@ -39,7 +39,6 @@ jobs:
       id: generateId
       run: |
         echo "$((${{github.run_number}}+10))"
-        echo '::set-output name=RUN_NUMBER_CUSTOM::"$((${{github.run_number}}+10))"'
-        echo "The run number is:  ${{ steps.generateId.outputs.RUN_NUMBER_CUSTOM }}"
+
      
         
